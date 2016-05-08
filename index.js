@@ -6,6 +6,9 @@ module.exports = (()=>{
   return svc;
 
   function parse(bashOutput, parameters){
+    parameters = parameters || {};
+    parameters.headers = parameters.headers || {};
+
     var lines = bashOutput.split(/[\n\r]+/);
     let headers = lines[0].split(/\s+/);
     lines = lines.slice(1);
@@ -20,9 +23,13 @@ module.exports = (()=>{
         } else {
           value = pieces[i];
         }
-        obj[headers[i]] = value;
+        obj[getHeaderName(parameters.headers, headers[i])] = value;
       }
       return obj;
     });
+  }
+
+  function getHeaderName(headerMap, headerName){
+    return headerMap[headerName] || headerName;
   }
 })();
