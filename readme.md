@@ -19,6 +19,8 @@ The following would convert all headers "MY_BASH_HEADER_NAME" to "myObjectKeyNam
 
     let bashInterpreter = require('bash-interpreter');
     let objects = bashInterpreter.parse(myBashOutput, {
+      headers: {
         "MY_BASH_HEADER_NAME": "myObjectKeyName"
+      }
     });
     console.log(objects);
