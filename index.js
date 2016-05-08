@@ -14,8 +14,11 @@ module.exports = (()=>{
     lines = lines.slice(1);
 
     return lines.map((line)=>{
+      let obj = {};
+      if (!line){
+        return null;
+      }
       let pieces = line.split(/\s+/);
-      var obj = {};
       for (var i = 0; i < headers.length && i < pieces.length; i++){
         var value;
         if (i == headers.length - 1){
@@ -26,7 +29,8 @@ module.exports = (()=>{
         obj[getHeaderName(parameters.headers, headers[i])] = value;
       }
       return obj;
-    });
+    })
+    .filter((obj)=>{ return !!obj; });
   }
 
   function getHeaderName(headerMap, headerName){

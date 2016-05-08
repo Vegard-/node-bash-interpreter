@@ -26,8 +26,6 @@ Google\\x20Chrome 27003 kenobi  txt      REG                1,1     34032 382158
       }
     });
 
-    console.log(result);
-
     assert.equal(result.length, 4);
 
     assert.equal(result[0].command, "Safari");
@@ -74,5 +72,13 @@ Google\\x20Chrome 27003 kenobi  txt      REG                1,1     34032 382158
     assert.equal(result[1].name, "/Applications/Opera.app/Contents/MacOS/Opera");
     assert.equal(result[2].name, "/Applications/Firefox.app/Contents/MacOS/Firefox");
     assert.equal(result[3].name, "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
+  });
+
+  it('should not include empty lines.', function () {
+    let output = 'ARG1 ARG2\na b\n\n';
+
+    let result = bashInterpreter.parse(output);
+
+    assert.equal(result.length, 1);
   });
 });
